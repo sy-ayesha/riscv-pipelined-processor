@@ -1,0 +1,14 @@
+# ModelSim
+work/
+*.wlf
+*.log
+transcript
+
+# Icarus Verilog
+*.vcd
+riscv_sim
+*.out
+
+# OS
+.DS_Store
+Thumbs.db
