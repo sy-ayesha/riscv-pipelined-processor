@@ -1,9 +1,3 @@
-// ============================================================
-// Execute.v
-// 5-Stage RISC-V Pipelined Processor — EX Stage
-// Includes: ALU, Branch Logic, Branch Target Calculation
-// ============================================================
-
 module Execute(
     input  [31:0] ReadData1,
     input  [31:0] ReadData2,
