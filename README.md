@@ -4,7 +4,6 @@
   <img src="https://img.shields.io/badge/Language-Verilog-blue?style=for-the-badge&logo=v&logoColor=white"/>
   <img src="https://img.shields.io/badge/ISA-RISC--V%20RV32I-green?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Simulator-ModelSim-orange?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/University-NEDUET-red?style=for-the-badge"/>
 </p>
 
 <p align="center">
@@ -14,20 +13,6 @@
 
 ---
 
-## 👥 Team
-
-| Name | Roll No |
-|---|---|
-| Syeda Ayesha Ali | EL-22008 |
-| Faraz Malik Awan | EL-22049 |
-| Zukhruf Khan | EL-22059 |
-| Tamseela Hussain | EL-22062 |
-
-**Course:** EL-421 Embedded Electronics — Open Ended Lab  
-**Instructor:** Ms. Arham Iqbal  
-**University:** NED University of Engineering and Technology, Karachi
-
----
 
 ## 📋 Table of Contents
 
@@ -57,20 +42,11 @@ This project implements a **classic 5-stage RISC-V pipeline** based on the RV32I
 
 ## Pipeline Architecture
 
-```
-  ┌──────┐    ┌──────┐    ┌──────┐    ┌──────┐    ┌──────┐
-  │  IF  │───▶│  ID  │───▶│  EX  │───▶│ MEM  │───▶│  WB  │
-  │      │    │      │    │      │    │      │    │      │
-  │ Fetch│    │Decode│    │  ALU │    │ D-Mem│    │ Reg  │
-  │  PC  │    │RegFile    │Branch│    │ R/W  │    │Write │
-  └──────┘    └──────┘    └──────┘    └──────┘    └──────┘
-      │    IF/ID    │   ID/EX   │  EX/MEM  │  MEM/WB  │
-      └─────────────┴───────────┴──────────┴──────────┘
-                         Pipeline Registers
+## Block Diagram
 
-  ◀──────────── Branch flush (EX/MEM → IF/ID) ─────────────
-  ◀──── Hazard stall: PCWrite=0, IF_ID_Write=0 ────────────
-```
+![Block Diagram](pipeline_diagram.png)
+
+
 
 ### Stage Responsibilities
 
@@ -101,8 +77,10 @@ riscv-pipeline/
 │
 ├── testbench/
 │   └── testbench.v                     ← Self-checking simulation testbench
-│
-└── README.md
+├── README.md
+      └── pipeline_diagram.png
+      └── data_hazard.png
+└── Project report
 ```
 
 ---
@@ -148,13 +126,8 @@ riscv-pipeline/
 
 ### Data Hazard — Load-Use Stall
 
-```
-Cycle:    1      2      3      4      5      6
-lw  x1   IF  →  ID  →  EX  →  MEM →  WB
-add x5       →  IF  →  ID  → [STALL] →  EX  →  MEM  →  WB
-                               ↑
-                    HDU inserts NOP bubble here
-```
+![Block Diagram](data_hazard.png)
+
 
 When detected:
 - **PC** is held (not incremented)
@@ -351,12 +324,3 @@ gtkwave riscv_pipeline.vcd
 
 ---
 
-## References
-
-1. Harris, D. & Harris, S. — *Digital Design and Computer Architecture* (RISC-V Edition)
-2. Patterson, D. & Hennessy, J. — *Computer Organization and Design: RISC-V Edition*
-3. *The RISC-V Instruction Set Manual, Volume I: Unprivileged ISA* — riscv.org
-
----
-
-<p align="center">Made with ❤️ at NEDUET | EL-421 Embedded Electronics 2026</p>
