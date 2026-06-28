@@ -1,17 +1,13 @@
-// ============================================================
-// HazardDetectionUnit.v
+
 // Detects load-use data hazards and inserts pipeline stalls
-//
 // Hazard condition:
 //   ID/EX stage has a LOAD instruction (MemRead = 1)
 //   AND its destination register (ID_EX_Rd) matches either
 //   source register of the IF/ID instruction
-//
 // Resolution: stall for 1 cycle
 //   PCWrite   = 0  → freeze PC
 //   IF_ID_Write= 0 → freeze IF/ID register
 //   ControlMux = 1 → insert NOP bubble into ID/EX
-// ============================================================
 
 module HazardDetectionUnit(
     input  [4:0] IF_ID_Rs1,
